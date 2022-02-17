@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">retrofitTuTuexample</string>
+    <string name="header_text">Rick And Morty characters</string>
 </resources>
