@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/random_card"
+            android:id="@+id/random_character_card"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:layout_marginLeft="20dp"
