@@ -17,16 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="@color/accent"
+            app:expandedTitleTextColor="@color/white"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="Character Details"
-            app:expandedTitleTextColor="@color/white">
+            app:title="Error load data">
 
             <ImageView
                 android:id="@+id/im_char_details"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"/>
+                app:layout_collapseMode="parallax" />
 
             <View
                 android:id="@+id/transparent_black"
@@ -38,7 +38,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin" />
 
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -56,6 +56,7 @@
         app:srcCompat="@drawable/ic_close" />
 
     <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
@@ -64,83 +65,119 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/tvDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/myfont"
+                android:text="- Details"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@id/tvDetails"
+                app:layout_constraintTop_toBottomOf="@id/tvDetails" />
+
             <LinearLayout
                 android:id="@+id/linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="15dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/tvDetails">
 
 
                 <TextView
-                    android:id="@+id/tv_race"
+                    android:id="@+id/tv_species"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Race: Human"
-                    android:textStyle="bold"
-                    android:textColor="@color/g_black"
+                    android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_race"
                     android:drawableTint="@color/g_black"
-                    android:layout_weight="1"/>
+                    android:text="Race: Error load data"
+                    android:textColor="@color/g_black"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Status: Alive"
-                    android:textStyle="bold"
-                    android:textColor="@color/g_black"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_status"
                     android:drawableTint="@color/g_black"
-                    android:layout_weight="1"/>
+                    android:text="Status: Error load data"
+                    android:textColor="@color/g_black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_gender"
+                    android:drawableTint="@color/g_black"
+                    android:text="Gender: Error load data"
+                    android:textColor="@color/g_black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_origin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_origin"
+                    android:drawableTint="@color/g_black"
+                    android:text="Type: Error load data"
+                    android:textColor="@color/g_black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_location"
+                    android:drawableTint="@color/g_black"
+                    android:text="Location: Error load data"
+                    android:textColor="@color/g_black"
+                    android:textStyle="bold" />
+
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="- Details"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/linear_layout"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:fontFamily="@font/myfont"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/tvDetails"
-                app:layout_constraintTop_toBottomOf="@id/tvDetails"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/black"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     <Button
-        android:id="@+id/btn_link_details"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
+        android:id="@+id/btn_url_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:backgroundTint="@color/primary"
-        android:text="Link"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="15dp"
+        android:text="Origin Info" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
+        android:visibility="gone"
         app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="bottom"
-        android:visibility="gone"/>
+        app:layout_anchorGravity="bottom" />
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

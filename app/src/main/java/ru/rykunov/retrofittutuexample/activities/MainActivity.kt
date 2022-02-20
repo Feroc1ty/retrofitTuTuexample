@@ -5,9 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import ru.rykunov.retrofittutuexample.R
+import ru.rykunov.retrofittutuexample.adapter.CharactersAdapter
 import ru.rykunov.retrofittutuexample.databinding.ActivityMainBinding
 import ru.rykunov.retrofittutuexample.pojo.CharacterRandom
+import ru.rykunov.retrofittutuexample.pojo.CharactersList
+import ru.rykunov.retrofittutuexample.pojo.Location
+import ru.rykunov.retrofittutuexample.pojo.Origin
+import ru.rykunov.retrofittutuexample.pojo.Result
 import ru.rykunov.retrofittutuexample.viewmodel.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -15,15 +22,37 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private lateinit var homeMvvm: HomeViewModel
     lateinit var randomChar: CharacterRandom
+    lateinit var origin: Origin
+    lateinit var location: Location
+    lateinit var charItemsAdapter: CharactersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        charItemsAdapter = CharactersAdapter(this)
         setContentView(binding.root)
+        prepareCharactercRcView()
         homeMvvm = ViewModelProviders.of(this)[HomeViewModel::class.java]
         homeMvvm.getRandomCharacter()
         observerRandomCharacter()
         onRandomCharacterClick()
+        homeMvvm.getCharactersList()
+        observeCharactersItemsLiveData()
+    }
+
+    private fun prepareCharactercRcView() {
+        binding.rcCharacters.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+            adapter = charItemsAdapter
+        }
+    }
+
+    private fun observeCharactersItemsLiveData() {
+        homeMvvm.observeCharactersLiveData().observe(this
+        ) { characterList ->
+            charItemsAdapter.setCharacters(charlist = characterList as ArrayList<Result>)
+        }
+
     }
 
     private fun onRandomCharacterClick() {
@@ -32,6 +61,12 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(CHAR_ID, randomChar.id)
             intent.putExtra(CHAR_NAME, randomChar.name)
             intent.putExtra(CHAR_IMG, randomChar.image)
+            intent.putExtra(CHAR_GENDER, randomChar.gender)
+            intent.putExtra(CHAR_SPECIES, randomChar.species)
+            intent.putExtra(CHAR_STATUS, randomChar.status)
+            intent.putExtra(CHAR_PLACE_NAME, randomChar.origin.name)
+            intent.putExtra(CHAR_PLACE_URL, randomChar.origin.url)
+            intent.putExtra(CHAR_LOCATION, randomChar.location.name)
             startActivity(intent)
         }
     }
@@ -47,6 +82,8 @@ class MainActivity : AppCompatActivity() {
                 binding.tvspecies.text = t.species
                 binding.tvstatus.text = t.status
                 randomChar = t
+                origin = t.origin
+                location = t.location
             }
         })
 
@@ -57,5 +94,11 @@ class MainActivity : AppCompatActivity() {
         const val CHAR_ID = "idChar"
         const val CHAR_NAME = "nameChar"
         const val CHAR_IMG = "imgChar"
+        const val CHAR_GENDER = "genderChar"
+        const val CHAR_SPECIES = "speciesChar"
+        const val CHAR_STATUS = "statusChar"
+        const val CHAR_LOCATION = "locChar"
+        const val CHAR_PLACE_NAME = "placeNameChar"
+        const val CHAR_PLACE_URL = "placeUrlChar"
     }
 }

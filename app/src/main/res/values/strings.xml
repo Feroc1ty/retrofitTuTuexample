@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">retrofitTuTuexample</string>
     <string name="header_text">Rick And Morty characters</string>
+    <string name="species_text">Species: </string>
+    <string name="status_text">Status: </string>
+    <string name="location_text">Location: </string>
+    <string name="gender_text">Gender: </string>
+    <string name="origin_text">Origin: </string>
+    <string name="loading_text">Loading data</string>
+    <string name="error_loading_text">Error loading data</string>
 </resources>
