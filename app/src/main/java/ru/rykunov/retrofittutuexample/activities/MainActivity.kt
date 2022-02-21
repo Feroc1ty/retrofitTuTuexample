@@ -94,17 +94,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun observerRandomCharacter() {
         homeMvvm.observeRandomCharacterLiveData().observe(this, object : Observer<Character>{
-            override fun onChanged(t: Character?) {
+            override fun onChanged(character: Character?) {
                 Glide.with(this@MainActivity)
-                    .load(t!!.image)
+                    .load(character!!.image)
                     .into(binding.imageRandom)
-                binding.tvrandom.text = t.name
-                binding.tvgender.text = t.gender
-                binding.tvspecies.text = t.species
-                binding.tvstatus.text = t.status
-                randomChar = t
-                origin = t.origin
-                location = t.location
+                binding.tvrandom.text = character.name
+                binding.tvgender.text = character.gender
+                binding.tvspecies.text = character.species
+                binding.tvstatus.text = character.status
+                randomChar = character
+                origin = character.origin
+                location = character.location
             }
         })
 

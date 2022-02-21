@@ -1,23 +1,15 @@
 package ru.rykunov.retrofittutuexample.activities
 
-import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import ru.rykunov.retrofittutuexample.R
-import ru.rykunov.retrofittutuexample.activities.MainActivity.Companion.CHAR_ID
 import ru.rykunov.retrofittutuexample.activities.MainActivity.Companion.CHAR_IMG
 import ru.rykunov.retrofittutuexample.activities.MainActivity.Companion.CHAR_NAME
 import ru.rykunov.retrofittutuexample.databinding.ActivityCharDetailsBinding
-import ru.rykunov.retrofittutuexample.viewmodel.CharacterViewModel
 
 class CharDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCharDetailsBinding
-    private lateinit var characterMvvm: CharacterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +20,6 @@ class CharDetailsActivity : AppCompatActivity() {
             finish()
         }
 
-        characterMvvm = ViewModelProviders.of(this)[CharacterViewModel::class.java]
         val intent = intent
         val gender = intent.getStringExtra(MainActivity.CHAR_GENDER)!!
         val status = intent.getStringExtra(MainActivity.CHAR_STATUS)!!
@@ -48,14 +39,9 @@ class CharDetailsActivity : AppCompatActivity() {
             startActivity(intent)
         }
          */
-        if(intent.getStringExtra(CHAR_IMG) != null){
-            Glide.with(applicationContext)
-                .load(intent.getStringExtra(CHAR_IMG))
-                .into(binding.imCharDetails)
-        }
-        else{
-            binding.imCharDetails.setImageDrawable(getDrawable(R.drawable.ic_close))
-        }
+        Glide.with(applicationContext)
+            .load(intent.getStringExtra(CHAR_IMG))
+            .into(binding.imCharDetails)
         }
 
 

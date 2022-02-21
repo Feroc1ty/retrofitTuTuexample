@@ -22,9 +22,12 @@ class HomeViewModel(): ViewModel() {
                     val randomChar: Character = response.body()!!
                     randomCharacterLiveData.value = randomChar
                 }
+
+                /*
                 else{
                     return
                 }
+                 */
             }
 
             override fun onFailure(call: Call<Character>, t: Throwable) {
