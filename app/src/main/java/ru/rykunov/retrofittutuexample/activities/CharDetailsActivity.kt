@@ -41,7 +41,8 @@ class CharDetailsActivity : AppCompatActivity() {
         binding.tvGender.setText("${getString(R.string.gender_text)} $gender")
         binding.tvOrigin.setText("${getString(R.string.origin_text)} $origin")
         binding.tvLocation.setText("${getString(R.string.location_text)} $location")
-        /*
+
+        /* Заготовка под переход по ссылке, но апи увы никаких веб страниц не дает, по этому увы
         binding.btnUrlInfo.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
