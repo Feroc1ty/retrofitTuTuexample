@@ -15,9 +15,9 @@ import ru.rykunov.retrofittutuexample.pojo.CharactersList
 import ru.rykunov.retrofittutuexample.pojo.Character
 import kotlin.coroutines.coroutineContext
 
-class CharactersAdapter(context: Context): RecyclerView.Adapter<CharactersAdapter.CharactersViewHolder>() {
+class CharactersAdapter(mainActivity: MainActivity) : RecyclerView.Adapter<CharactersAdapter.CharactersViewHolder>() {
     private var charactersList = ArrayList<Character>()
-    private val context = context
+    lateinit var onItemClick: ((Character) -> Unit)
 
     fun setCharacters(charlist: ArrayList<Character>){
         this.charactersList = charlist
@@ -38,8 +38,7 @@ class CharactersAdapter(context: Context): RecyclerView.Adapter<CharactersAdapte
         holder.binding.tvStatus.setText(charactersList[position].status)
 
         holder.binding.characterCard.setOnClickListener {
-                val intent = Intent(context, CharDetailsActivity::class.java)
-                Log.d("MyLog","Click on card $position")
+                onItemClick.invoke(charactersList[position])
         }
     }
 

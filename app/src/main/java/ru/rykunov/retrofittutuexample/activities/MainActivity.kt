@@ -35,8 +35,30 @@ class MainActivity : AppCompatActivity() {
         onRandomCharacterClick()
         homeMvvm.getCharactersList()
         observeCharactersItemsLiveData()
+        onCharacterItemClick()
     }
 
+    /*
+    Слушатель нажатий в RecyclerView и передача данных в новое акативити через интент
+     */
+    private fun onCharacterItemClick() {
+        charItemsAdapter.onItemClick = { character ->
+            val intent = Intent(this, CharDetailsActivity::class.java)
+            intent.putExtra(CHAR_ID, character.id)
+            intent.putExtra(CHAR_NAME, character.name)
+            intent.putExtra(CHAR_IMG, character.image)
+            intent.putExtra(CHAR_GENDER, character.gender)
+            intent.putExtra(CHAR_STATUS, character.status)
+            intent.putExtra(CHAR_SPECIES, character.species)
+            intent.putExtra(CHAR_PLACE_NAME, character.origin.name)
+            intent.putExtra(CHAR_PLACE_URL, character.origin.url)
+            intent.putExtra(CHAR_LOCATION, character.location.name)
+            startActivity(intent)
+        }
+    }
+    /*
+    Подготовка Recycler View
+     */
     private fun prepareCharactercRcView() {
         binding.rcCharacters.apply {
             layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
@@ -51,7 +73,9 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
+    /*
+    Слушатель нажатий в блоке случайного персонажа и передача данных в новое акативити через интент
+     */
     private fun onRandomCharacterClick() {
         binding.randomCharacterCard.setOnClickListener{
             val intent = Intent(this, CharDetailsActivity::class.java)
