@@ -1,5 +1,5 @@
 package ru.rykunov.retrofittutuexample.pojo
 
 data class CharactersList(
-    val results: List<Result>
+    val results: List<Character>
 )

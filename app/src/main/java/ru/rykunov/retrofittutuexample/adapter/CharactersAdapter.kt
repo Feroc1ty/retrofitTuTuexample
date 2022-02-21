@@ -12,14 +12,14 @@ import ru.rykunov.retrofittutuexample.activities.CharDetailsActivity
 import ru.rykunov.retrofittutuexample.activities.MainActivity
 import ru.rykunov.retrofittutuexample.databinding.CharactersItemsBinding
 import ru.rykunov.retrofittutuexample.pojo.CharactersList
-import ru.rykunov.retrofittutuexample.pojo.Result
+import ru.rykunov.retrofittutuexample.pojo.Character
 import kotlin.coroutines.coroutineContext
 
 class CharactersAdapter(context: Context): RecyclerView.Adapter<CharactersAdapter.CharactersViewHolder>() {
-    private var charactersList = ArrayList<Result>()
+    private var charactersList = ArrayList<Character>()
     private val context = context
 
-    fun setCharacters(charlist: ArrayList<Result>){
+    fun setCharacters(charlist: ArrayList<Character>){
         this.charactersList = charlist
         notifyDataSetChanged()
     }

@@ -7,20 +7,19 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import ru.rykunov.retrofittutuexample.pojo.CharacterRandom
 import ru.rykunov.retrofittutuexample.pojo.CharactersList
-import ru.rykunov.retrofittutuexample.pojo.Result
+import ru.rykunov.retrofittutuexample.pojo.Character
 import ru.rykunov.retrofittutuexample.retrofit.RetrofitInstance
 
 class HomeViewModel(): ViewModel() {
-    private var randomCharacterLiveData = MutableLiveData<CharacterRandom>()
-    private var charactersListLiveData = MutableLiveData<List<Result>>()
+    private var randomCharacterLiveData = MutableLiveData<Character>()
+    private var charactersListLiveData = MutableLiveData<List<Character>>()
 
     fun getRandomCharacter(){
-        RetrofitInstance.api.getRandomCharacter((1..20).random().toString()).enqueue(object : Callback<CharacterRandom> {
-            override fun onResponse(call: Call<CharacterRandom>, response: Response<CharacterRandom>) {
+        RetrofitInstance.api.getRandomCharacter((1..20).random().toString()).enqueue(object : Callback<Character> {
+            override fun onResponse(call: Call<Character>, response: Response<Character>) {
                 if(response.body() != null){
-                    val randomChar: CharacterRandom = response.body()!!
+                    val randomChar: Character = response.body()!!
                     randomCharacterLiveData.value = randomChar
                 }
                 else{
@@ -28,7 +27,7 @@ class HomeViewModel(): ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<CharacterRandom>, t: Throwable) {
+            override fun onFailure(call: Call<Character>, t: Throwable) {
                 Log.d("MyLog", t.message.toString())
             }
 
@@ -52,11 +51,11 @@ class HomeViewModel(): ViewModel() {
         })
     }
 
-    fun observeRandomCharacterLiveData(): LiveData<CharacterRandom>{
+    fun observeRandomCharacterLiveData(): LiveData<Character>{
         return randomCharacterLiveData
     }
 
-    fun observeCharactersLiveData(): LiveData<List<Result>>{
+    fun observeCharactersLiveData(): LiveData<List<Character>>{
         return charactersListLiveData
     }
 }

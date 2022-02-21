@@ -7,21 +7,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import ru.rykunov.retrofittutuexample.R
 import ru.rykunov.retrofittutuexample.adapter.CharactersAdapter
 import ru.rykunov.retrofittutuexample.databinding.ActivityMainBinding
-import ru.rykunov.retrofittutuexample.pojo.CharacterRandom
-import ru.rykunov.retrofittutuexample.pojo.CharactersList
+import ru.rykunov.retrofittutuexample.pojo.Character
 import ru.rykunov.retrofittutuexample.pojo.Location
 import ru.rykunov.retrofittutuexample.pojo.Origin
-import ru.rykunov.retrofittutuexample.pojo.Result
 import ru.rykunov.retrofittutuexample.viewmodel.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private lateinit var homeMvvm: HomeViewModel
-    lateinit var randomChar: CharacterRandom
+    lateinit var randomChar: Character
     lateinit var origin: Origin
     lateinit var location: Location
     lateinit var charItemsAdapter: CharactersAdapter
@@ -50,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeCharactersItemsLiveData() {
         homeMvvm.observeCharactersLiveData().observe(this
         ) { characterList ->
-            charItemsAdapter.setCharacters(charlist = characterList as ArrayList<Result>)
+            charItemsAdapter.setCharacters(charlist = characterList as ArrayList<Character>)
         }
 
     }
@@ -58,22 +55,22 @@ class MainActivity : AppCompatActivity() {
     private fun onRandomCharacterClick() {
         binding.randomCharacterCard.setOnClickListener{
             val intent = Intent(this, CharDetailsActivity::class.java)
-            intent.putExtra(CHAR_ID, randomChar.id)
-            intent.putExtra(CHAR_NAME, randomChar.name)
-            intent.putExtra(CHAR_IMG, randomChar.image)
-            intent.putExtra(CHAR_GENDER, randomChar.gender)
-            intent.putExtra(CHAR_SPECIES, randomChar.species)
-            intent.putExtra(CHAR_STATUS, randomChar.status)
-            intent.putExtra(CHAR_PLACE_NAME, randomChar.origin.name)
-            intent.putExtra(CHAR_PLACE_URL, randomChar.origin.url)
-            intent.putExtra(CHAR_LOCATION, randomChar.location.name)
+            intent.putExtra(CHAR_ID, randomChar?.id)
+            intent.putExtra(CHAR_NAME, randomChar?.name)
+            intent.putExtra(CHAR_IMG, randomChar?.image)
+            intent.putExtra(CHAR_GENDER, randomChar?.gender)
+            intent.putExtra(CHAR_SPECIES, randomChar?.species)
+            intent.putExtra(CHAR_STATUS, randomChar?.status)
+            intent.putExtra(CHAR_PLACE_NAME, randomChar?.origin.name)
+            intent.putExtra(CHAR_PLACE_URL, randomChar?.origin.url)
+            intent.putExtra(CHAR_LOCATION, randomChar?.location.name)
             startActivity(intent)
         }
     }
 
     private fun observerRandomCharacter() {
-        homeMvvm.observeRandomCharacterLiveData().observe(this, object : Observer<CharacterRandom>{
-            override fun onChanged(t: CharacterRandom?) {
+        homeMvvm.observeRandomCharacterLiveData().observe(this, object : Observer<Character>{
+            override fun onChanged(t: Character?) {
                 Glide.with(this@MainActivity)
                     .load(t!!.image)
                     .into(binding.imageRandom)

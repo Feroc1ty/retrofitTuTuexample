@@ -7,15 +7,15 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import ru.rykunov.retrofittutuexample.pojo.CharacterRandom
+import ru.rykunov.retrofittutuexample.pojo.Character
 import ru.rykunov.retrofittutuexample.retrofit.RetrofitInstance
 
 class CharacterViewModel(): ViewModel() {
-    private val characterLiveData = MutableLiveData<CharacterRandom>()
+    private val characterLiveData = MutableLiveData<Character>()
 
     fun getCharacterDetail(id : String){
-        RetrofitInstance.api.getCharacterDetails(id).enqueue(object : Callback<CharacterRandom>{
-            override fun onResponse(call: Call<CharacterRandom>, response: Response<CharacterRandom>) {
+        RetrofitInstance.api.getCharacterDetails(id).enqueue(object : Callback<Character>{
+            override fun onResponse(call: Call<Character>, response: Response<Character>) {
                 if (response.body() != null){
                     characterLiveData.value = response.body()
                 }
@@ -23,13 +23,13 @@ class CharacterViewModel(): ViewModel() {
 
             }
 
-            override fun onFailure(call: Call<CharacterRandom>, t: Throwable) {
+            override fun onFailure(call: Call<Character>, t: Throwable) {
                 Log.d("MyLog", t.message.toString())
             }
         })
     }
 
-    fun observerCharacterDetailsLiveData(): LiveData<CharacterRandom>{
+    fun observerCharacterDetailsLiveData(): LiveData<Character>{
         return characterLiveData
     }
 

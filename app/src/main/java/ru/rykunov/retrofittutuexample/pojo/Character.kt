@@ -1,8 +1,7 @@
 package ru.rykunov.retrofittutuexample.pojo
 
-data class CharacterRandom(
+data class Character(
     val created: String,
-    val episode: List<String>,
     val gender: String,
     val id: Int,
     val image: String,
